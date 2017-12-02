@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+    <head lang="en" th:replace="fragments/head-resources :: resources">
+        <title>Secured Content</title>
+    </head>
+
+    <body>
+
+        <h2 style="color: red;">Not Authorized</h2>
+        <!--<h2 th:text="Thymeleaf Access Denied">Not Authorized</h2>-->
+
+        <div class="container" style="height: 100vh;">
+            <div class="row" >
+                <div class="col-md-12">
+                    <h1>authoritues : </h1>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-10 col-md-offset-2" sec:authorize="isAuthenticated()">
+                    <h2 class="green">principal.authorities   <span sec:authentication="principal.authorities">name</span></h2>
+                    <h2 class="green">User   <span sec:authentication="principal.username">name</span> is Logged In</h2>
+
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-10 col-md-offset-2" sec:authorize="!isAuthenticated()">
+                    <h2 class="red">User is Logged Out</h2>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-10 col-md-offset-2" sec:authorize="hasRole('ADMIN')">
+                    <h2>With Role Admin</h2>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-10 col-md-offset-2" sec:authorize="hasRole('CUSTOMER')">
+                    <h2>With Role Customer</h2>
+                </div>
+            </div>
+        </div>
+        <div th:replace="fragments/footer :: footer">
+        </div>
+    </body>
+</html>

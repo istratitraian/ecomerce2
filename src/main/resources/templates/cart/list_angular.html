@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head lang="en" th:replace="fragments/head-resources :: resources">
+        <title>Cart</title>
+
+    </head>
+    <body>
+        <footer th:replace="fragments/navbar :: navbar"></footer>
+
+        <script src="" th:src="@{/webjars/angularjs/1.6.6/angular.min.js}"></script>
+        <script src="../../static/js/controller.js" th:src="@{/static/js/controller.js}"></script>
+
+        <div class="container" 
+             id="margin-top50-bottom150" 
+             ng-app="cartApp" >
+            <div ng-controller="cartController"  th:attr="ng-init=@{'initCartById(\''+${cart.id}+'\')'}">
+
+                <!--                <p >cartId : {{cartId}}</p>
+                                <p >cart : {{cart}}</p>-->
+
+
+                <!--<div th:if="${not #lists.isEmpty(cart.items)}" >-->
+                <h2>Angular REST Cart Items</h2>
+                <a href="" ng-click="clearCart()">Remove All from Cart</a>
+                <table class="table table-striped">
+                    <tr>
+                        <th>Id</th>
+                        <th>Description</th>
+                        <th>Price</th>
+                        <th>Quantity</th>
+                        <th>Total</th>
+                        <!--<th>Update</th>-->
+                        <th>Delete</th>
+                    </tr>
+
+                    <tr ng-repeat="item in cart.items" >
+
+                        <td>{{item.product.id}}</td>
+                        <td>{{item.product.description}}</td>
+                        <td>{{item.product.price}}</td>
+                        <td>{{item.quantity}}</td>
+                        <td>{{item.total}}</td>
+                        <!--<td><a th:href="@{'/cart/update/' + ${item.id}}">Update</a> </td>-->
+                        <td><a href="" ng-click="removeFromCart(item.id)">Remove</a> </td>
+                    </tr>
+
+
+                </table>
+
+
+                <div class="row">
+                    <div class="col-sm-3">
+                        Total : {{cart.totalCost}}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <footer th:replace="fragments/footer :: footer"></footer>
+
+    </body>
+</html>

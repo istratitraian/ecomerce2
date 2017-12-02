@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+    <head lang="en" th:replace="fragments/head-resources :: resources">
+
+        <title>Cart</title>
+
+    </head>
+    <body>
+
+        <nav th:replace="fragments/navbar :: navbar"></nav>
+
+
+        <div class="container" id="margin-top50-bottom150">
+            <!--ng-app="cartApp" >-->
+            <!--            <div ng-controller="cartController" 
+                             th:attr="ng-init=@{'initCartById('+${cart.id}+')'}">-->
+
+            <!--<p >{{cart}}</p>-->
+            <div th:if="${not #lists.isEmpty(cart.items)}" >
+
+
+                <h2>Cart Items</h2>
+                <td><a th:href="@{/cart/removeAllCartItems/}">Remove All Items</a> </td>
+                <table class="table table-striped">
+                    <tr>
+                        <th>Id</th>
+                        <th>Product Id</th>
+                        <th>Description</th>
+                        <th>Price</th>
+                        <th>Quantity</th>
+                        <th>Total</th>
+                        <!--<th>Update</th>-->
+                        <th>Delete</th>
+                    </tr>
+
+
+                    <tr th:each="item : ${cart.items}">
+                        <td th:text="${item.id}"></td>
+                        <td th:text="${item.product.id}"></td>
+                        <td th:text="${item.product.description}"></td>
+                        <td th:text="${item.product.price}"></td>
+                        <td th:text="${item.quantity}"></td>
+                        <td th:text="${item.total}"></td>
+                        <!--<td th:text="${item.product.imageUrl}"></td>-->
+                        <!--<td><a th:href="@{'/product/show/' + ${product.id}}">Show</a> </td>-->
+                        <!--<td><a th:href="@{'/cart/update/' + ${item.id}}">Update</a> </td>-->
+                        <td><a th:href="@{'/cart/delete/' + ${item.id}}">Delete</a> </td>
+                    </tr>
+
+                </table>
+
+            </div>
+            <div class="row">
+                <div class="col-sm-3">
+                    Total : <span th:text="${cart.totalCost}" ></span>
+                </div>
+            </div>
+
+            <!--</div>-->
+        </div>
+        <footer th:replace="fragments/footer :: footer"></footer>
+
+  
+
+    </body>
+</html>
