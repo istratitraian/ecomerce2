@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -43,6 +44,8 @@ public class CartRestCotnroller {
         return "cart/list_angular";
     }
 
+    
+    @CrossOrigin
     @GetMapping("/rest/cart/{cartId}")
     @ResponseBody
     public Cart getCartById(@PathVariable(value = "cartId") Integer cartId) {
@@ -50,6 +53,8 @@ public class CartRestCotnroller {
         return cart;
     }
 
+    
+    @CrossOrigin
     @DeleteMapping("/rest/cart/delete/{itemId}")
     @ResponseStatus(value = HttpStatus.NO_CONTENT)
     public void dleteItem(@PathVariable(value = "itemId") Integer itemId) {
@@ -59,6 +64,8 @@ public class CartRestCotnroller {
         cartItemRepository.delete(item);
     }
 
+    
+    @CrossOrigin
     @DeleteMapping("/rest/cart/{cartId}/clear")
     @ResponseStatus(value = HttpStatus.NO_CONTENT)
     public void removeAllCartItems(@PathVariable(value = "cartId") Integer cartId) {
